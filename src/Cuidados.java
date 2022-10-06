@@ -16,13 +16,15 @@ public class Cuidados implements Serializable{
     private float costePromedio;
     private float cantidadComidaKG;
     private int periodicidadComidaDias;
+    private Animales animal;
 
-    public Cuidados(String tipoComida, String habitat, float costePromedio, float cantidadComidaKG, int periodicidadComidaDias) {
+    public Cuidados(String tipoComida, String habitat, float costePromedio, float cantidadComidaKG, int periodicidadComidaDias, Animales animal) {
         this.tipoComida = tipoComida;
         this.habitat = habitat;
         this.costePromedio = costePromedio;
         this.cantidadComidaKG = cantidadComidaKG;
         this.periodicidadComidaDias = periodicidadComidaDias;
+        this.animal= animal;
     }
 
     public String getTipoComida() {
@@ -63,6 +65,14 @@ public class Cuidados implements Serializable{
 
     public void setPeriodicidadComidaDias(int periodicidadComidaDias) {
         this.periodicidadComidaDias = periodicidadComidaDias;
+    }
+
+    public Animales getAnimal() {
+        return animal;
+    }
+
+    public void setAnimal(Animales animal) {
+        this.animal = animal;
     }
          
     

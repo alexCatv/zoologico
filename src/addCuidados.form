@@ -38,28 +38,28 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jLTitulo" alignment="1" max="32767" attributes="0"/>
+              <Component id="jLTitulo" alignment="1" pref="800" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="costePromedio" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="periodicidadComida" alignment="1" min="-2" pref="211" max="-2" attributes="0"/>
-                          <Component id="habitat" min="-2" pref="89" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="periodicidadComida" pref="211" max="32767" attributes="0"/>
+                      <Component id="habitat" min="-2" pref="89" max="-2" attributes="0"/>
                       <Component id="tipoComida" alignment="0" min="-2" pref="122" max="-2" attributes="0"/>
                       <Component id="cantidadComida" alignment="0" min="-2" pref="145" max="-2" attributes="0"/>
+                      <Component id="animal_Cuidar" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jTextField4" min="-2" pref="283" max="-2" attributes="0"/>
-                      <Component id="recogeTipoComida" min="-2" pref="283" max="-2" attributes="0"/>
-                      <Component id="jTextField3" min="-2" pref="283" max="-2" attributes="0"/>
-                      <Component id="jTextField5" min="-2" pref="283" max="-2" attributes="0"/>
-                      <Component id="recogeCantidad" min="-2" pref="283" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="animalCuidado" max="32767" attributes="0"/>
+                      <Component id="jTextField4" pref="283" max="32767" attributes="0"/>
+                      <Component id="recogeTipoComida" pref="283" max="32767" attributes="0"/>
+                      <Component id="jTextField3" pref="283" max="32767" attributes="0"/>
+                      <Component id="jTextField5" pref="283" max="32767" attributes="0"/>
+                      <Component id="recogeCantidad" pref="283" max="32767" attributes="0"/>
                       <Component id="jButton1" min="-2" pref="139" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="210" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -67,7 +67,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jLTitulo" min="-2" pref="92" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="tipoComida" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                       <Component id="recogeTipoComida" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
@@ -92,9 +92,14 @@
                       <Component id="periodicidadComida" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                       <Component id="jTextField3" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="animal_Cuidar" max="32767" attributes="0"/>
+                      <Component id="animalCuidado" pref="51" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                   <Component id="jButton1" min="-2" pref="37" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -105,8 +110,8 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Skygraze" size="24" style="0"/>
             </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="A&#xd1;ADIR CUIDADO"/>
-            <Property name="horizontalTextPosition" type="int" value="0"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="tipoComida">
@@ -162,6 +167,29 @@
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>
             <Property name="text" type="java.lang.String" value="A&#xd1;ADIR CUIDADO"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="animalCuidado">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="Item 1"/>
+                <StringItem index="1" value="Item 2"/>
+                <StringItem index="2" value="Item 3"/>
+                <StringItem index="3" value="Item 4"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="animal_Cuidar">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Skygraze" size="14" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="ANIMAL"/>
           </Properties>
         </Component>
       </SubComponents>

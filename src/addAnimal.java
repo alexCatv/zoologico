@@ -1,3 +1,7 @@
+
+import java.io.*;
+import java.util.*;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -5,15 +9,24 @@
 
 /**
  *
- * @author ozilb
+ * @author Cristian
  */
 public class addAnimal extends javax.swing.JFrame {
-
+    ArrayList <Animales> Animales;
     /**
      * Creates new form addAnimal
      */
     public addAnimal() {
         initComponents();
+        Animales = new ArrayList <Animales>();
+    }
+    
+    public void guardarAnimal(Animales animal){
+        
+    }
+    
+    public void cargarAnimales (ArrayList Animales){
+        
     }
 
     /**
@@ -41,6 +54,7 @@ public class addAnimal extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(800, 600));
 
         titulo.setFont(new java.awt.Font("Skygraze", 0, 24)); // NOI18N
+        titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titulo.setText("AÑADIR ANIMAL");
 
         especieAnimal.setFont(new java.awt.Font("Skygraze", 0, 18)); // NOI18N
