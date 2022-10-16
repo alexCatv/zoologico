@@ -1,26 +1,25 @@
-
-import java.io.Serializable;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+package Login;
+import java.io.Serializable;
 
 /**
  *
  * @author Cristian
  */
-public class Cuidadores implements Serializable{
+public class User implements Serializable{
     private String nombre;
-    private int idCuidador;
     private String apellidos;
-    private Especialidad especialidad;
+    private String user;
+    private String password;
 
-    public Cuidadores(String nombre, int idCuidador, String apellidos, Especialidad especialidad) {
+    public User(String nombre, String apellidos, String user, String password) {
         this.nombre = nombre;
-        this.idCuidador = idCuidador;
         this.apellidos = apellidos;
-        this.especialidad = especialidad;
+        this.user = user;
+        this.password = password;
     }
 
     public String getNombre() {
@@ -31,14 +30,6 @@ public class Cuidadores implements Serializable{
         this.nombre = nombre;
     }
 
-    public int getIdCuidador() {
-        return idCuidador;
-    }
-
-    public void setIdCuidador(int idCuidador) {
-        this.idCuidador = idCuidador;
-    }
-
     public String getApellidos() {
         return apellidos;
     }
@@ -47,14 +38,24 @@ public class Cuidadores implements Serializable{
         this.apellidos = apellidos;
     }
 
-    public Especialidad getEspecialidad() {
-        return especialidad;
+    public String getUser() {
+        return user;
     }
 
-    public void setEspecialidad(Especialidad especialidad) {
-        this.especialidad = especialidad;
+    public void setUser(String user) {
+        this.user = user;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     
+
     
     
     

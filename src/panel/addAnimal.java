@@ -1,6 +1,8 @@
-
+package panel;
 import java.io.*;
 import java.util.*;
+import javax.swing.JOptionPane;
+import utilities.herramienta;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -13,20 +15,24 @@ import java.util.*;
  */
 public class addAnimal extends javax.swing.JFrame {
     ArrayList <Animales> Animales;
+    
+    
+    
     /**
      * Creates new form addAnimal
      */
     public addAnimal() {
         initComponents();
         Animales = new ArrayList <Animales>();
+        herramienta.rellenar_array(Animales, "Animales.dat");
     }
     
-    public void guardarAnimal(Animales animal){
-        
-    }
     
-    public void cargarAnimales (ArrayList Animales){
-        
+    public void vaciar(){
+        recogerNombre.setText("");
+        recogerEspecie.setText("");
+        recogerPesoAnimal.setText("");
+        recogerSubespecieAnimal.setText("");
     }
 
     /**
@@ -71,6 +77,11 @@ public class addAnimal extends javax.swing.JFrame {
 
         addAnima.setFont(new java.awt.Font("Skygraze", 0, 14)); // NOI18N
         addAnima.setText("AÑADIR");
+        addAnima.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addAnimaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -145,6 +156,23 @@ public class addAnimal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addAnimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAnimaActionPerformed
+        // TODO add your handling code here:
+        String nombreAnimal = recogerNombre.getText();
+        String especieAnimal = recogerEspecie.getText();
+        String subespecieAnimal = recogerSubespecieAnimal.getText();
+        float pesoAnimal = Float.valueOf(recogerPesoAnimal.getText());
+        
+        Animales a = new Animales(especieAnimal, subespecieAnimal, pesoAnimal, nombreAnimal);
+        
+        Animales.add(a);
+        
+        herramienta.guardar_objetos(Animales, "Animales.dat");
+        
+        vaciar();
+    }//GEN-LAST:event_addAnimaActionPerformed
+
+    
     /**
      * @param args the command line arguments
      */

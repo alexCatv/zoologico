@@ -1,7 +1,9 @@
-
+package panel;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import javax.swing.JOptionPane;
+import utilities.herramienta;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -18,49 +20,29 @@ public class addCuidados extends javax.swing.JFrame {
      * Creates new form addCuidados
      */
     ArrayList<Animales> Animales;
-    
+    ArrayList<Cuidados> Cuidados;
     public addCuidados() {
         initComponents();
         Animales=new ArrayList<Animales>();
-        rellenaAnimales();
+        Cuidados=new ArrayList<Cuidados>();
+        herramienta.rellenar_array (Animales, "Animales.dat");
+        herramienta.rellenar_array(Cuidados, "Cuidados.dat");
+        rellenaComboBox();
+    }
+    public void vaciar (){
+        recogeTipoComida.setText("");
+        RecogeCantidadComida.setText("");
+        RecogeCostePromedio.setText("");
+        RecogePeriodicidadComida.setText("");
+        recogeHabitat.setText("");
+        animalCuidado.setSelectedIndex(0);
     }
     
-    public void rellenaAnimales(){
-        try{
-            FileInputStream file =new FileInputStream("Animales.dat");
-            ObjectInputStream inputFile= new ObjectInputStream(file);
-            boolean finalFichero=false;
-            while(!finalFichero){
-                try{
-                    Animales.add((Animales)inputFile.readObject());
-                }catch(EOFException e){
-                    finalFichero=true;
-                }catch(Exception f){
-                    JOptionPane.showMessageDialog(null, f.getMessage());
-                }
-            }
-            inputFile.close();
-        }catch(IOException f){
-            JOptionPane.showMessageDialog(null, f.getMessage());
-        }
-    }
-    
-    public void saveCare(){
-        try{
-            FileOutputStream file =new FileOutputStream("Animales.dat");
-            ObjectOutputStream OutputFile= new ObjectOutputStream(file);
-            
-            for (int i = 0; i < Animales.size(); i++) {
-                OutputFile.writeObject(Animales.get(i));
-            }
-            OutputFile.close();
-            JOptionPane.showMessageDialog(null, "Guardado correctamente");
-            this.dispose(); //Cierra la ventana del jOptionpane show sin cerrar la app
-        }catch(IOException e){
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-    }
-        
+    public void rellenaComboBox(){
+        for (int i = 0; i < Animales.size(); i++) {
+            animalCuidado.addItem(Animales.get(i).getName());
+        } 
+    }  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -79,10 +61,10 @@ public class addCuidados extends javax.swing.JFrame {
         costePromedio = new javax.swing.JLabel();
         periodicidadComida = new javax.swing.JLabel();
         recogeTipoComida = new javax.swing.JTextField();
-        recogeCantidad = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        recogeHabitat = new javax.swing.JTextField();
+        RecogePeriodicidadComida = new javax.swing.JTextField();
+        RecogeCantidadComida = new javax.swing.JTextField();
+        RecogeCostePromedio = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         animalCuidado = new javax.swing.JComboBox<>();
         animal_Cuidar = new javax.swing.JLabel();
@@ -109,8 +91,11 @@ public class addCuidados extends javax.swing.JFrame {
         periodicidadComida.setText("periodicidad comidas");
 
         jButton1.setText("AÑADIR CUIDADO");
-
-        animalCuidado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         animal_Cuidar.setFont(new java.awt.Font("Skygraze", 0, 14)); // NOI18N
         animal_Cuidar.setText("ANIMAL");
@@ -132,11 +117,11 @@ public class addCuidados extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(animalCuidado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
+                    .addComponent(RecogeCantidadComida, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
                     .addComponent(recogeTipoComida, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
-                    .addComponent(recogeCantidad, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
+                    .addComponent(RecogePeriodicidadComida, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
+                    .addComponent(RecogeCostePromedio, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
+                    .addComponent(recogeHabitat, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -151,19 +136,19 @@ public class addCuidados extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(habitat, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(recogeCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(recogeHabitat, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(costePromedio, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(RecogeCostePromedio, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cantidadComida, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(RecogeCantidadComida, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(periodicidadComida, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(RecogePeriodicidadComida, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(animal_Cuidar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -187,6 +172,38 @@ public class addCuidados extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String tipoComida = recogeTipoComida.getText();
+        String habitat = recogeHabitat.getText();
+        float costePromedio = Float.valueOf(RecogeCostePromedio.getText());
+        float cantidadComida = Float.valueOf(RecogeCantidadComida.getText());
+        int periodicidadComidad = Integer.parseInt(RecogePeriodicidadComida.getText());
+        String nombreAnimal = (String) animalCuidado.getSelectedItem();
+        int posAnimal = buscarAnimal(nombreAnimal);
+        Animales animal = Animales.get(posAnimal);
+        
+        Cuidados especial = new Cuidados (tipoComida, habitat, costePromedio, cantidadComida, periodicidadComidad, animal);
+        Cuidados.add(especial);
+        herramienta.guardar_objetos(Cuidados, "Cuidados.dat");
+        vaciar();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public int buscarAnimal(String nombreAnimal){
+        Iterator it=Animales.iterator();
+        int pos=0;
+        int posAnimal=0;
+        while (it.hasNext()) {
+            Animales animal = (Animales) it.next();
+            if(animal.getName()==nombreAnimal){
+                posAnimal=pos;
+            }else{
+                pos++;
+            } 
+        }
+        return posAnimal;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -223,6 +240,9 @@ public class addCuidados extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField RecogeCantidadComida;
+    private javax.swing.JTextField RecogeCostePromedio;
+    private javax.swing.JTextField RecogePeriodicidadComida;
     private javax.swing.JComboBox<String> animalCuidado;
     private javax.swing.JLabel animal_Cuidar;
     private javax.swing.JLabel cantidadComida;
@@ -231,11 +251,8 @@ public class addCuidados extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLTitulo;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JLabel periodicidadComida;
-    private javax.swing.JTextField recogeCantidad;
+    private javax.swing.JTextField recogeHabitat;
     private javax.swing.JTextField recogeTipoComida;
     private javax.swing.JLabel tipoComida;
     // End of variables declaration//GEN-END:variables

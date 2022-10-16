@@ -1,3 +1,7 @@
+package panel;
+import java.util.ArrayList;
+import utilities.herramienta;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -5,17 +9,26 @@
 
 /**
  *
- * @author ozilb
+ * @author Cristian
  */
 public class addEspecialidad extends javax.swing.JFrame {
-
+    ArrayList <Especialidad> especialidades;
     /**
      * Creates new form addEspecialidad
      */
     public addEspecialidad() {
         initComponents();
+        especialidades = new ArrayList <Especialidad>();
+        herramienta.rellenar_array(especialidades, "especialidad.dat");
     }
 
+    public void vaciar(){
+        recogerExtraPeligrosidad.setText("");
+        recogerNombreEspecialidad.setText("");
+        recogerSalario.setText("");
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,8 +45,8 @@ public class addEspecialidad extends javax.swing.JFrame {
         salario = new javax.swing.JLabel();
         recogerSalario = new javax.swing.JTextField();
         salario1 = new javax.swing.JLabel();
-        recogerSalario1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        recogerExtraPeligrosidad = new javax.swing.JTextField();
+        añadir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -53,9 +66,14 @@ public class addEspecialidad extends javax.swing.JFrame {
         salario1.setFont(new java.awt.Font("Skygraze", 0, 14)); // NOI18N
         salario1.setText("EXTRA POR PELIGROSIDAD");
 
-        jButton1.setFont(new java.awt.Font("Skygraze", 0, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/añadir.png"))); // NOI18N
-        jButton1.setText("Añadir");
+        añadir.setFont(new java.awt.Font("Skygraze", 0, 14)); // NOI18N
+        añadir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/añadir.png"))); // NOI18N
+        añadir.setText("Añadir");
+        añadir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                añadirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout Capa1Layout = new javax.swing.GroupLayout(Capa1);
         Capa1.setLayout(Capa1Layout);
@@ -72,13 +90,13 @@ public class addEspecialidad extends javax.swing.JFrame {
                             .addComponent(salario1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(41, 41, 41)
                         .addGroup(Capa1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(recogerSalario1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(recogerExtraPeligrosidad, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(recogerSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(recogerNombreEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(20, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Capa1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(añadir, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(328, 328, 328))
         );
         Capa1Layout.setVerticalGroup(
@@ -95,10 +113,10 @@ public class addEspecialidad extends javax.swing.JFrame {
                     .addComponent(recogerSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(57, 57, 57)
                 .addGroup(Capa1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(recogerSalario1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(recogerExtraPeligrosidad, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(salario1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(53, 53, 53)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(añadir, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 82, Short.MAX_VALUE))
         );
 
@@ -106,6 +124,18 @@ public class addEspecialidad extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void añadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirActionPerformed
+        // TODO add your handling code here:
+        String nombreEspecialidad = recogerNombreEspecialidad.getText();
+        float extraPeligrosidad = Float.valueOf(recogerExtraPeligrosidad.getText());
+        float salario = Float.valueOf(recogerSalario.getText());
+        
+        Especialidad especialidad = new Especialidad(nombreEspecialidad, salario, extraPeligrosidad);
+        especialidades.add(especialidad);
+        herramienta.guardar_objetos(especialidades, "especialidad.dat");
+        vaciar();
+    }//GEN-LAST:event_añadirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -124,13 +154,13 @@ public class addEspecialidad extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(addEspecialidad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(addCuidados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(addEspecialidad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(addCuidados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(addEspecialidad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(addCuidados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(addEspecialidad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(addCuidados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -141,15 +171,15 @@ public class addEspecialidad extends javax.swing.JFrame {
             }
         });
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Capa1;
     private javax.swing.JLabel Titulo;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton añadir;
     private javax.swing.JLabel nombreEspecialidad;
+    private javax.swing.JTextField recogerExtraPeligrosidad;
     private javax.swing.JTextField recogerNombreEspecialidad;
     private javax.swing.JTextField recogerSalario;
-    private javax.swing.JTextField recogerSalario1;
     private javax.swing.JLabel salario;
     private javax.swing.JLabel salario1;
     // End of variables declaration//GEN-END:variables

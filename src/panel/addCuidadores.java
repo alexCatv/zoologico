@@ -1,3 +1,10 @@
+package panel;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import utilities.herramienta;
+
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -5,17 +12,47 @@
 
 /**
  *
- * @author ozilb
+ * @author Cristian
  */
 public class addCuidadores extends javax.swing.JFrame {
-
+    ArrayList <Especialidad> especialidades;
+    ArrayList <Cuidadores> Cuidadores;
+    ArrayList <Animales> Animales;
+    
     /**
      * Creates new form addCuidadores
      */
     public addCuidadores() {
         initComponents();
+        especialidades= new ArrayList<Especialidad>();
+        Cuidadores= new ArrayList<Cuidadores>();
+        Animales= new ArrayList<Animales>();
+        herramienta.rellenar_array(especialidades, "especialidad.dat");
+        herramienta.rellenar_array(Cuidadores, "Cuidadores.dat");
+        herramienta.rellenar_array(Animales, "Animales.dat");
+        rellenaComboBox();
+        rellenaComboBoxAnimales();
     }
 
+    public void rellenaComboBox(){
+        for (int i = 0; i < especialidades.size(); i++) {
+            Especialidades.addItem(especialidades.get(i).getNombreEspecialidad());
+        }
+    }
+    
+    public void rellenaComboBoxAnimales(){
+        for (int i = 0; i < Animales.size(); i++) {
+            recogerAnimalCuidado.addItem(Animales.get(i).getName());
+        }
+    }
+    
+    public void vaciar (){
+        recogeNombre.setText("");
+        recogeApellidos.setText("");
+        recogeNumeroCuidador.setText("");
+        Especialidades.setSelectedIndex(0);
+        recogerAnimalCuidado.setSelectedIndex(0);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,9 +73,10 @@ public class addCuidadores extends javax.swing.JFrame {
         Especialidad = new javax.swing.JLabel();
         Especialidades = new javax.swing.JComboBox<>();
         ADD = new javax.swing.JButton();
+        animalCuidado = new javax.swing.JLabel();
+        recogerAnimalCuidado = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
 
         Capa0.setBackground(new java.awt.Color(155, 207, 232));
         Capa0.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -51,31 +89,42 @@ public class addCuidadores extends javax.swing.JFrame {
 
         Nombre.setFont(new java.awt.Font("Skygraze", 0, 14)); // NOI18N
         Nombre.setText("NOMBRE");
-        Capa0.add(Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 160, 60));
-        Capa0.add(recogeNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 460, 60));
+        Capa0.add(Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 160, 60));
+        Capa0.add(recogeNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, 460, 60));
 
         Apellidos.setFont(new java.awt.Font("Skygraze", 0, 14)); // NOI18N
         Apellidos.setText("apellidos");
-        Capa0.add(Apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 150, 60));
-        Capa0.add(recogeApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 200, 460, 60));
+        Capa0.add(Apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 150, 60));
+        Capa0.add(recogeApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, 460, 60));
 
         numeroCuidador.setFont(new java.awt.Font("Skygraze", 0, 14)); // NOI18N
         numeroCuidador.setText("Número cuidador");
-        Capa0.add(numeroCuidador, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 160, 60));
-        Capa0.add(recogeNumeroCuidador, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 270, 460, 60));
+        Capa0.add(numeroCuidador, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 160, 60));
+        Capa0.add(recogeNumeroCuidador, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 250, 460, 60));
 
         Especialidad.setFont(new java.awt.Font("Skygraze", 0, 14)); // NOI18N
         Especialidad.setText("ESPECIALIDAD");
-        Capa0.add(Especialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, 170, 60));
+        Capa0.add(Especialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, 170, 60));
 
         Especialidades.setFont(new java.awt.Font("Skygraze", 0, 11)); // NOI18N
-        Especialidades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        Capa0.add(Especialidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 340, 460, 60));
+        Capa0.add(Especialidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 320, 460, 60));
 
         ADD.setFont(new java.awt.Font("Skygraze", 0, 11)); // NOI18N
         ADD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/añadir.png"))); // NOI18N
         ADD.setText("Añadir");
-        Capa0.add(ADD, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 420, 280, 90));
+        ADD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ADDActionPerformed(evt);
+            }
+        });
+        Capa0.add(ADD, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 490, 280, 90));
+
+        animalCuidado.setFont(new java.awt.Font("Skygraze", 0, 14)); // NOI18N
+        animalCuidado.setText("ANIMAL A CUIDAR");
+        Capa0.add(animalCuidado, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 390, 170, 60));
+
+        recogerAnimalCuidado.setFont(new java.awt.Font("Skygraze", 0, 11)); // NOI18N
+        Capa0.add(recogerAnimalCuidado, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 390, 460, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,6 +140,56 @@ public class addCuidadores extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void ADDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ADDActionPerformed
+        // TODO add your handling code here:
+        String nombre = recogeNombre.getText();
+        String apellidos = recogeApellidos.getText();
+        int numeroCuidador = Integer.parseInt(recogeNumeroCuidador.getText());
+        String nombreEspecialidad = (String) Especialidades.getSelectedItem();
+        
+        int posEspecialidad = buscarEspecialidad(nombreEspecialidad);
+        Especialidad e = especialidades.get(posEspecialidad);
+        
+        String nombreAnimal = (String) recogerAnimalCuidado.getSelectedItem();
+        int posAnimal = buscarAnimal(nombreAnimal);
+        Animales animal = Animales.get(posAnimal);
+        
+        Cuidadores c = new Cuidadores (nombre, numeroCuidador, apellidos, e, animal);
+        Cuidadores.add(c);
+        herramienta.guardar_objetos(Cuidadores, "Cuidadores.dat");
+        vaciar();
+    }//GEN-LAST:event_ADDActionPerformed
+
+    public int buscarAnimal(String nombreAnimal){
+        Iterator it=Animales.iterator();
+        int pos=0;
+        int posAnimal=0;
+        while (it.hasNext()) {
+            Animales animal = (Animales) it.next();
+            if(animal.getName()==nombreAnimal){
+                posAnimal=pos;
+            }else{
+                pos++;
+            } 
+        }
+        return posAnimal;
+    }
+    
+    public int buscarEspecialidad(String nombreEspecialidad){
+        Iterator it=especialidades.iterator();
+        int pos=0;
+        int posEspecialidad=0;
+        while (it.hasNext()) {
+            Especialidad e = (Especialidad) it.next();
+            if(e.getNombreEspecialidad()==nombreEspecialidad){
+                posEspecialidad=pos;
+            }else{
+                pos++;
+            } 
+        }
+        return posEspecialidad;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -134,9 +233,11 @@ public class addCuidadores extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> Especialidades;
     private javax.swing.JLabel Nombre;
     private javax.swing.JLabel TituloPagina;
+    private javax.swing.JLabel animalCuidado;
     private javax.swing.JLabel numeroCuidador;
     private javax.swing.JTextField recogeApellidos;
     private javax.swing.JTextField recogeNombre;
     private javax.swing.JTextField recogeNumeroCuidador;
+    private javax.swing.JComboBox<String> recogerAnimalCuidado;
     // End of variables declaration//GEN-END:variables
 }
